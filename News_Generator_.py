@@ -9,7 +9,7 @@ import base64
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# Load environment variables
+# environment variables
 load_dotenv()
 google_api_key = os.getenv("GOOGLE_GEMINI_API")
 unsplash_access_key = os.getenv("UNSPLASH_ACCESS_KEY")
