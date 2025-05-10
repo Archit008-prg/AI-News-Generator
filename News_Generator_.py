@@ -20,7 +20,6 @@ if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-# Initialize Gemini model with system message
 llm2 = ChatGoogleGenerativeAI(
     model="models/gemini-1.5-flash-latest",
     google_api_key=google_api_key,
@@ -70,7 +69,6 @@ Structured detailed explanation with facts and recent developments. Avoid using 
 
     res = llm2.invoke(base_prompt)
     
-    # Retry if template or placeholders are returned
     if "[insert" in res.content.lower() or "template" in res.content.lower():
         retry_prompt = f"""You gave a placeholder. Now try again. 
 Write a complete, fact-filled, concise, and real news article about "{topic}". 
@@ -79,7 +77,6 @@ DO NOT use [insert...] or any placeholders. Provide real information and structu
     
     return res
 
-# --- Streamlit App Starts Here ---
 st.title("📰 NewsForge")
 st.write("Get the latest news on any topic, powered by AI and Unsplash images.")
 
